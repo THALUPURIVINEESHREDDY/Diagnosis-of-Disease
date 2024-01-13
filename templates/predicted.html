@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='file.css') }}">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: url("{{url_for('static',filename='predictedbg.jpeg')}}") no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        div {
+            padding: 10px;
+            font-size: 16px;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        #main {
+            display: flex;
+        }
+
+        #left {
+            display: flex-row;
+            height: 30vh;
+            width: 35%;
+            border-radius: 5px;
+        }
+
+        #right {
+            height: 65vh;
+            width: 90%;
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        #dis1,
+        #dis2 {
+            width: 100%;
+            height: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 5px;
+        }
+
+        #dis1:hover,
+        #dis2:hover {
+            background-color: #6497b1;
+        }
+
+        h1 {
+            margin: 0;
+            color: white;
+            font-size: 20px;
+        }
+
+        h2 {
+            margin: 0;
+            color: #00FFFF;
+            font-size: 20px;
+        }
+
+        .maincontent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+
+        #righttop,
+        #rightbottom {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+
+        #righttop {
+            height: 35%;
+        }
+
+        #rightbottom {
+            height: 65%;
+        }
+
+        #right1,
+        #right2 {
+            width: 100%;
+            display: none;
+            border-radius: 5px;
+            background-color: transparent;
+        }
+
+        #right1 p,
+        #right2 p {
+            margin: 0;
+            color: #333;
+            font-family: 'Courier New', monospace;
+        }
+        #rightbottom,#righttop{
+            background-color: rgba(100, 151, 177, 0.7);;
+
+            backdrop-filter: blur(10px);
+
+        }
+        ol{
+            color: white;
+        }
+    
+    .warn{
+        text-align: center;
+        background-color:rgba(128, 128, 128, 0.5);
+    }
+    </style>
+</head>
+
+<body>
+{% include 'header.html' %}
+  <div class="warn">
+    <h1 style="color: red;"><sup>*</sup> Note: These are Machine predicted results. <br>If there is/are any severe symptoms CONSULT DOCTOR </h1>
+  </div>
+    <div id="main">
+        <div id="left">
+            <div id="dis1">
+                <h2 id="disp1" onclick="display1()">{{diseases[0]}}</h2>
+            </div>
+            <div id="dis2">
+                <h2 id="disp2" onclick="display2()">{{diseases[1]}}</h2>
+            </div>
+        </div>
+        <div id="right">
+            <div class="maincontent" id="right1">
+                <div id="righttop">
+                    <br><br>
+                    <h1 style="color: white;">Description:</h1> <br>
+                    <p style="margin-left: 20px; color: white;">{{description[0]}}</p>
+                </div>
+                <div id=rightbottom>
+                    <br>
+                    <h1 style="color: white;">Precautions:</h1> <br>
+                    <ol type="i">
+                        {% for i in range(5) %}
+                        <li>{{ precaution[i] }}</li>
+                        {% endfor %}
+                    </ol>
+                    <br><br>
+                    <p style="color: white; font-size: 1.3rem;">{{message}}</p>
+                </div>
+            </div>
+            <div class="maincontent" id="right2">
+                <div id="righttop">
+                    <br><br>
+                    <h1 style="color: white;">Description:</h1> <br>
+                    <p style="margin-left: 20px;color: white;">{{description[1]}}</p>
+                </div>
+                <div id=rightbottom>
+                    <br>
+                    <h1 style="color: white;">Precautions:</h1> <br>
+                    <ol type="i">
+                        {% for i in range(5,10) %}
+                        <li>{{ precaution[i] }}</li>
+                        {% endfor %}
+                    </ol>
+                    <br><br>
+                    <p style="color: white; font-size: 1.3rem;">{{message}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function display1() {
+        document.getElementById("right1").style.display = "block";
+        document.getElementById("right2").style.display = "none";
+    }
+    function display2() {
+        document.getElementById("right2").style.display = "block";
+        document.getElementById("right1").style.display = "none";
+    }
+</script>
+</html>

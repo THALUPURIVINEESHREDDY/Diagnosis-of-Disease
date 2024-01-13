@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='file.css') }}">
+   <style>
+      .container {
+         width: 100%;
+      }
+      .container h1 {
+         font-size: 50px;
+      }
+      .about, .mission {
+         padding: 5% 0;
+         width: 100%;
+         height: auto;
+         background-color: #fff;
+         display: flex;
+      }
+      .about .left, .about .right, .mission .left, .mission .right {
+         width: 50%;
+         display: inline-block;
+      }
+      .about .right img, .mission .left img {
+         width: 100%;
+         height: 450px;
+      }
+      .about .left h1, .mission .right h1 {
+         text-align: center;
+         color: #1EADFF;
+         margin: 0 0 10px 0;
+      }
+      .about .left hr, .mission .right hr {
+         width: 20%;
+         border-top: 2px solid #000;
+         border-bottom: none;
+      }
+      .about .left p, .mission .right p {
+         font-size: 1rem;
+         margin: 40px auto;
+         width: 80%;
+      }
+      .mission .right h1 {
+         margin-bottom: 20px;
+      }
+      .mission .right hr {
+         width: 35%;
+      }
+      footer {
+         width: 100%;
+         height: 100px;
+         background-color: #28587c;
+      }
+      footer p {
+         text-align: center;
+         padding: 0 2%;
+      }
+      @media (max-width: 1200px) {
+         .mission .right p, .about .left p {
+            font-size: 0.8rem;
+            margin: 20px auto;
+         }
+      }
+      @media (max-width: 992px) {
+         .about .left, .about .right, .mission .left, .mission .right {
+            width: 100%;
+         }
+      }
+      .about, .mission {
+         display: flex;
+      }
+   </style>
+</head>
+
+<body>
+   {%include 'header.html'%}
+   <div class="container">
+      <div class="about">
+         <div class="left">
+            <h1>About us</h1>
+            <hr>
+            <p>Our AI-based Doctor is not just a virtual assistant; it's a sophisticated medical intelligence system
+               designed to understand, analyze, and respond to your health concerns with the highest level of
+               accuracy. By harnessing the capabilities of machine learning and natural language processing, our
+               platform continuously learns and evolves, staying up-to-date with the latest medical research and
+               advancements.</p>
+
+            <p>Recognizing individual uniqueness, our AI-based Doctor delivers personalized care based on health
+               history, genetics, lifestyle, and preferences. This tailored approach enhances treatment
+               effectiveness, ensuring that each patient receives interventions aligned with their specific
+               needs.Health concerns don't adhere to regular hours. Our AI-based Doctor is accessible 24/7,
+               providing instant access to medical advice and information. This ensures users can seek guidance at
+               their convenience, eliminating unnecessary delays in receiving healthcare support.</p>
+         </div>
+         <div class="right">
+            <img src="{{url_for('static',filename='about1.jpg')}}">
+         </div>
+      </div>
+      <div class="mission">
+         <div class="left">
+            <img src="{{url_for('static',filename='about2.jpg')}}">
+         </div>
+         <div class="right">
+            <h1>Mission Statement</h1>
+            <hr>
+            <p>we are on a mission to revolutionize healthcare through cutting-edge artificial intelligence. Our
+               commitment is to redefine the traditional doctor-patient relationship by harnessing the power of AI
+               to provide accessible, efficient, and personalized medical guidance</p>
+
+            <p>We envision a future where healthcare is not bound by geographical limitations or constrained by
+               resource disparities. By leveraging state-of-the-art machine learning algorithms, our AI-based
+               Doctor is designed to analyze vast amounts of medical data, enabling precise diagnostics and
+               tailored treatment recommendations.
+
+               Our mission extends beyond simply treating illnesses; we aim to empower individuals to take control
+               of their health. Through user-friendly interfaces and intuitive interactions, we strive to make
+               healthcare a collaborative and informed journey.</p>
+         </div>
+      </div>
+   </div>
+   <footer>
+      <br>
+      <p>Copyright ©️2024 @@@@@@@@. All rights reserved</p>
+   </footer>
+</body>
+
+</html>

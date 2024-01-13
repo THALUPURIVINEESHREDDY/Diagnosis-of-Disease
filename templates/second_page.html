@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI BASED DOCTOR</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='file.css') }}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: url("{{ url_for('static',filename='background.jpg')}}") no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    #bin {
+      padding: 0;
+    }
+
+    form {
+      width: 900px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      margin-left: 400px;
+      margin-top: 200px;
+    }
+
+    #threshold {
+      width: 100px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      padding: 10px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      width: 200px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    function addSymptomField() {
+      var selectContainer = document.getElementById("symptoms-container");
+      var originalDiv = document.getElementById("symptom-div-1");
+      var cloneDiv = originalDiv.cloneNode(true);
+      var newDivId = "symptom-div-" + (selectContainer.children.length + 1);
+      cloneDiv.id = newDivId;
+
+      var newSymptomsSelect = cloneDiv.querySelector("select[name='symptoms']");
+      var newThresholdSelect = cloneDiv.querySelector("select[name='threshold']");
+      var newBinButton = cloneDiv.querySelector("button");
+      newSymptomsSelect.name = "symptoms_" + (selectContainer.children.length + 1);
+      newSymptomsSelect.id = "symptoms_" + (selectContainer.children.length + 1);
+      newThresholdSelect.name = "threshold_" + (selectContainer.children.length + 1);
+      newThresholdSelect.id = "threshold_" + (selectContainer.children.length + 1);
+
+      newBinButton.onclick = function () {
+        removeSymptomField(this);
+      };
+      newBinButton.id = "bin_" + (selectContainer.children.length + 1);
+      newBinButton.disabled = false;
+      newBinButton.style.cursor = "pointer";
+      selectContainer.appendChild(cloneDiv);
+    }
+    function removeSymptomField(button) {
+      var parentDiv = button.parentNode;
+      if (parentDiv) {
+        parentDiv.parentNode.removeChild(parentDiv);
+      }
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      var z = document.getElementById("symptom-div-1").querySelector("button");
+      z.disabled = true;
+      z.style.cursor = "not-allowed";
+    });
+  </script>
+</head>
+<body>
+  {% include 'header.html' %}
+  <form action="{{ url_for('predict') }}" method="POST" class="mt-4">
+    <div id="formtop">
+      <label for="gender" style="color: black">Gender</label>
+      <select name="gender" id="gender">
+        <option value="" selected></option>
+        <option value="Male" style="color: black">Male</option>
+        <option value="Female" style="color: black">Female</option>
+      </select>
+      <label for="age" style="color: black">Age</label>
+      <input type="number" name="age" id="age" />
+    </div>
+    <div id="symptoms-container">
+      <div id="symptom-div-1" class="form-row align-items-center">
+        <label for="symptoms" style="color: black">Select a symptom:</label>
+        <select name="symptoms" id="symptoms">
+          <option value="" selected></option>
+          {% for symptom in symptoms %}
+          <option value="{{ symptom }}">{{ symptom }}</option>
+          {% endfor %}
+        </select>
+        <label for="threshold" style="color: black">Suffering rate:</label>
+        <select name="threshold" id="threshold">
+          <option value="" selected></option>
+          {% for i in range(1,11) %}
+          <option value="{{i}}">{{i}}</option>
+          {% endfor %}
+        </select>
+        <button type="button" id="bin" onclick="removeSymptomField(this)">
+          <img src="{{ url_for('static',filename='bin.png')}}" alt="remove Symptom" height="20px" width="30px" />
+        </button>
+      </div>
+    </div>
+    <button type="button" onclick="addSymptomField()">Add Symptom</button>
+    <input type="submit" value="Predict" />
+  </form>
+</body>
+</html>

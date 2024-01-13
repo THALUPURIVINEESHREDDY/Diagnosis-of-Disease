@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static',filename='homepage.css')}}">
+</head>
+<body>
+  <div class="header">DISEASE PREDICTOR</div>
+  <video autoplay loop muted plays-inline class="back-video">
+    <source src="{{ url_for('static',filename='login_background.mp4')}}">
+  </video>
+  <div class="container">
+    <div class="backbox">
+      <div class="loginMsg">
+        <div class="textcontent">
+          <p class="title">Don't have an account?</p>
+          <p>Sign up to save all your graph.</p>
+          <button id="switch1">Sign Up</button>
+        </div>
+      </div>
+      <div class="signupMsg visibility">
+        <div class="textcontent">
+          <p class="title">Have an account?</p>
+          <p>Log in to see all your collection.</p>
+          <button id="switch2">LOG IN</button>
+        </div>
+      </div>
+    </div>
+    <div class="frontbox">
+      <form action="{{ url_for('login') }}" method="post">
+        <div class="login">
+          <h2>LOG IN</h2>
+          <div class="error">
+            <p style="color: red;">{{error}}</p>
+          </div>
+          <div class="inputbox">
+            <input type="text" name="email" placeholder="EMAIL">
+            <input type="password" name="password" placeholder="PASSWORD">
+          </div>
+          <p>FORGET PASSWORD?</p>
+          <button>LOG IN</button>
+        </div>
+      </form>
+      <form action="{{ url_for('signup') }}" method="post">
+        <div class="signup hide">
+          <h2>SIGN UP</h2>
+          <div class="inputbox">
+            <input type="text" name="username" placeholder="FULLNAME">
+            <input type="text" name="email" placeholder="EMAIL">
+            <input type="password" name="password" placeholder="PASSWORD">
+          </div>
+          <button>SIGN UP</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    var $loginMsg = document.querySelector('.loginMsg');
+    var $login = document.querySelector('.login');
+    var $signupMsg = document.querySelector('.signupMsg');
+    var $signup = document.querySelector('.signup');
+    var $frontbox = document.querySelector('.frontbox');
+
+    document.getElementById('switch1').addEventListener('click', function() {
+      $loginMsg.classList.toggle('visibility');
+      $frontbox.classList.add('moving');
+      $signupMsg.classList.toggle('visibility');
+      $signup.classList.toggle('hide');
+      $login.classList.toggle('hide');
+    });
+    document.getElementById('switch2').addEventListener('click', function() {
+      $loginMsg.classList.toggle('visibility');
+      $frontbox.classList.remove('moving');
+      $signupMsg.classList.toggle('visibility');
+      $signup.classList.toggle('hide');
+      $login.classList.toggle('hide');
+    });
+  </script>
+</body>
+</html>

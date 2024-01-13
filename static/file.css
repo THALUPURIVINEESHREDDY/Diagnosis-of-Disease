@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+ }
+ .top {
+    display: flex;
+    padding: 10px;
+    position: relative;
+    transition: background-color 0.3s;
+    background: linear-gradient(90deg, #2ecc71, #3498db, #2ecc71);
+    background-size: 200% 200%;
+    color: #fff;
+    animation: gradient 3s infinite;
+ }
+ a,a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+ }
+ .box {
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: auto;
+    margin-top: 0px;
+    margin-left: 80px;
+ }
+ .i {
+    display: inline-block;
+    padding: 25px;
+    font-size: 1.5rem;
+ }
+
+ .head1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    font-weight: 700;
+    margin-left: 100px;
+ }
+
+ .head2 {
+    position: absolute;
+    right: 0;
+ }
+
+ @keyframes gradient {
+    0% {
+       background-position: 0% 50%;
+    }
+    50% {
+       background-position: 100% 50%;
+    }
+    100% {
+       background-position: 0% 50%;
+    }
+ }
